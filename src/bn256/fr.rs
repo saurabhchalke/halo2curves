@@ -16,7 +16,6 @@ use core::ops::{Add, Mul, Neg, Sub};
 use rand::RngCore;
 use subtle::{Choice, ConditionallySelectable, ConstantTimeEq, CtOption};
 
-#[cfg(feature = "derive_serde")]
 use serde::{Deserialize, Serialize};
 
 /// This represents an element of $\mathbb{F}_r$ where
@@ -27,8 +26,7 @@ use serde::{Deserialize, Serialize};
 // The internal representation of this type is four 64-bit unsigned
 // integers in little-endian order. `Fr` values are always in
 // Montgomery form; i.e., Fr(a) = aR mod r, with R = 2^256.
-#[derive(Clone, Copy, PartialEq, Eq, Hash)]
-#[cfg_attr(feature = "derive_serde", derive(Serialize, Deserialize))]
+#[derive(Clone, Copy, PartialEq, Eq, Hash, Serialize, Deserialize)]
 pub struct Fr(pub(crate) [u64; 4]);
 
 /// Constant representing the modulus
